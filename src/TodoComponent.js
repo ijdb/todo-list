@@ -22,10 +22,18 @@ function TodoComponent() {
 			handleAddTodo();
 		}
 	};
-
+	const handleDelete = (indexToDelete) => {
+		setTodos(todos.filter((_, index) => index !== indexToDelete));
+		inputRef.current.focus();
+	};
+	const handleToggle = (index) => {
+		const updatedTodos = [...todos];
+		updatedTodos[index].completed = !updatedTodos[index].completed;
+		setTodos(updatedTodos);
+	};
 	return (
-		<div>
-			<div className="todo-title">Todo List</div>
+		<div className="parent-container">
+			<h1 className="todo-title">Todo List</h1>
 			<input
 				type="text"
 				value={newTodo}
@@ -33,10 +41,15 @@ function TodoComponent() {
 				ref={inputRef}
 				onKeyDown={handleKeyPress}
 			/>
-			<button onClick={handleAddTodo}>Add</button>
+			<button onClick={handleAddTodo}>+ Add</button>
 			<div className="todo-list">
 				{todos.map((todo, index) => (
-					<TodoItem key={index} todo={todo} />
+					<TodoItem
+						key={index}
+						todo={todo}
+						deleteItem={() => handleDelete(index)}
+						done={() => handleToggle(index)}
+					/>
 				))}
 			</div>
 		</div>
