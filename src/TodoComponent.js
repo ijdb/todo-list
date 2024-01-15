@@ -11,8 +11,11 @@ function TodoComponent() {
 	}, []);
 
 	const handleAddTodo = () => {
-		if (newTodo.trim()) {
-			setTodos([...todos, { text: newTodo, completed: false }]);
+		if (newTodo.trim() !== "") {
+			setTodos([
+				...todos,
+				{ text: newTodo.substring(1, 14), completed: false },
+			]);
 			setNewTodo("");
 		}
 		inputRef.current.focus();
@@ -33,7 +36,7 @@ function TodoComponent() {
 	};
 	return (
 		<div className="parent-container">
-			<h1 className="todo-title">Todo List</h1>
+			<div className="todo-title">Todo List</div>
 			<input
 				type="text"
 				value={newTodo}
