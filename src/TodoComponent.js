@@ -39,6 +39,7 @@ function TodoComponent() {
 			<div className="todo-title">Todo List</div>
 			<input
 				type="text"
+				name="todo"
 				value={newTodo}
 				onChange={(e) => setNewTodo(e.target.value)}
 				ref={inputRef}
